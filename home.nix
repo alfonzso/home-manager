@@ -2,7 +2,23 @@
 {
   home = {
     packages = with pkgs; [
-      hello
+      iotop
+      xrdp
+      unixtools.nettools
+      xclip
+      tmux
+      mc
+      sublime4
+      kubectl
+      kubernetes-helm
+      rsync
+      go
+      nodejs_22
+      starship
+      # neo
+      myNeo
+      vscode
+      x11vnc
     ];
 
     # This needs to actually be set to your username
@@ -13,4 +29,7 @@
     # Don't ever change this after the first build.  Don't ask questions.
     stateVersion = "23.11";
   };
+
+  programs.home-manager.enable = true;
+
 }
