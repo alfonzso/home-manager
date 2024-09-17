@@ -33,21 +33,23 @@
     stateVersion = "23.11";
   };
 
-  programs.git = {
-    enable = true;
-    userName = "EALFZSO";
-    userEmail = "zsolt.alfoldi@ericsson.com";
-    # includes = [
-    #   { path = "~/.gitconfig.local"; }
-    # ];
-  };
-  programs.home-manager.enable = true;
-  programs.zsh = {
-    enable = true;
-    oh-my-zsh = {
+  programs = {
+    git = {
       enable = true;
-      theme = "avit";  # Set the desired theme here
-      plugins = [ "git" "sudo" "z"];
+      userName = "EALFZSO";
+      userEmail = "zsolt.alfoldi@ericsson.com";
+      # includes = [
+      #   { path = "~/.gitconfig.local"; }
+      # ];
+    };
+    home-manager.enable = true;
+    zsh = {
+      enable = true;
+      oh-my-zsh = {
+        enable = true;
+        theme = "avit";  # Set the desired theme here
+        plugins = [ "git" "sudo" "z"];
+      };
     };
   };
 
