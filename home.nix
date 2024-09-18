@@ -2,7 +2,6 @@
 {
   home = {
     packages = with pkgs; [
-      busybox
       vim
       git
       iotop
