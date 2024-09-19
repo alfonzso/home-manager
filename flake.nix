@@ -36,13 +36,23 @@
 
     in {
       # pkgs.x86_64-linux.myNeovim = myNeo;
+      home-manager.backupFileExtension = ".bak";
       homeConfigurations = {
+        # home-manager.backupFileExtension = ".bak";
+        # backupFileExtension = ".bak";
+
         zsolt = home-manager.lib.homeManagerConfiguration {
+          # home-manager.backupFileExtension
+          # backupFileExtension = ".bak";
           # inherit combinedPkgs;
           pkgs = combinedPkgs;
-          modules = [ ./home.nix ];
+          modules = [
+            ./home.nix
+          ];
 
         };
+        # zsolt.backupFileExtension = ".bak";
+
       };
     };
 }
