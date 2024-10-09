@@ -2,11 +2,11 @@
 
 ```shell
 # install nix in linux with single user
-# apt install xz-utils curl wget vim sudo
+# apt install xz-utils curl wget vim sudo git adduser
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
 
 # needed in .bashrc
-. /home/system/.nix-profile/etc/profile.d/nix.sh
+. /home/$USER/.nix-profile/etc/profile.d/nix.sh
 
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
