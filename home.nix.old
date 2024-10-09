@@ -1,0 +1,231 @@
+{ lib, pkgs, ... }:
+{
+
+  home = {
+
+    packages = with pkgs; [
+      ripgrep-all
+      fzf
+      tldr
+      fluxcd
+      expect
+      k9s
+      kubectx
+      operator-sdk
+      kubebuilder
+      kind
+      vim
+      iotop
+      xrdp
+      unixtools.nettools
+      xclip
+      tmux
+      mc
+      sublime4
+      kubectl
+      kubernetes-helm
+      rsync
+      go
+      nodejs_22
+      starship
+      # neo
+      myNeo
+      vscode
+      x11vnc
+      jq
+      bash-completion
+    ];
+
+    # sessionVariables = {
+    #   EDITOR = "vim";
+    #   # LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.gcc-unwrapped.lib}/lib64:${pkgs.libz}/lib";
+    #   LD_LIBRARY_PATH = "$LD_LIBRARY_PATH:${pkgs.libz}/lib";
+    # };
+    # This needs to actually be set to your username
+    username = "ealfzso";
+    homeDirectory = "/home/ealfzso";
+
+    # You do not need to change this if you're reading this in the future.
+    # Don't ever change this after the first build.  Don't ask questions.
+      stateVersion = "23.11";
+    };
+
+    # env.LD_LIBRARY_PATH = "${pkgs.gcc-unwrapped.lib}/lib64:${pkgs.libz}/lib";
+    # programs.direnv = {
+    #     enable = true;
+    #     enableBashIntegration = true; # see note on other shells below
+    #     nix-direnv.enable = true;
+    #   };
+    programs.home-manager.enable = true;
+
+    programs.git = {
+      enable = true;
+      userName = "Zsolt Alföldi";
+      userEmail = "zsolt.alfoldi@ericsson.com";
+      # includes = [
+      #   { path = "~/.gitconfig.local"; }
+      # ];
+
+      ignores = [
+        ".tmp"
+        "tmp"
+      ];
+
+      # extraConfig = {
+      #   "merge.tool" = "vimdiff";  # Replace 'your-mergetool' with the name of your merge tool, e.g., 'vimdiff', 'meld', etc.
+      #   "mergetool.prompt" = false;
+      # };
+
+    extraConfig = {
+      core = {
+        editor = "nvim";
+        whitespace = "trailing-space,space-before-tab";
+        quotepath = "off";
+      };
+      stash = {
+        showPatch = "1";
+      };
+      color = {
+        pager = "true";
+        diff = "true";
+        grep = "true";
+        interactive = "true";
+        status = "always";
+        ui = "true";
+      };
+      "merge \"po\"" = {
+        name = "Gettext merge driver";
+        driver = "git-merge-po.sh %O %A %B";
+      };
+      apply = {
+        whitespace = "fix";
+      };
+      diff = {
+        tool = "nvim -d";
+        colorMoved = "default";
+      };
+      # tag = {
+      #   sort = "version:refname";
+      # };
+      # fetch = {
+      #   prune = "true";
+      # };
+      # protocol = {
+      #   version = "2";
+      # };
+      "color \"diff-highlight\"" = {
+        oldNormal = "red bold";
+        oldHighlight = "red bold 52";
+        newNormal = "green bold";
+        newHighlight = "green bold 22";
+      };
+      "color \"diff\"" = {
+        meta = "yellow";
+        frag = "magenta bold";
+        commit = "yellow bold";
+        old = "red bold";
+        new = "green bold";
+        whitespace = "red reverse";
+      };
+      merge = {
+        # tool = "meld";
+        tool = "nvim";
+        # tool = "vscode";
+      };
+      "mergetool \"meld\"" = {
+        cmd = "meld \"$LOCAL\" \"$MERGED\" \"$REMOTE\" --output \"$MERGED\"";
+      };
+      "mergetool \"nvim\"" = {
+        cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '$wincmd w' -c 'wincmd J'";
+      };
+      "mergetool \"vscode\"" = {
+        cmd = "code --wait \"$MERGED\"";
+      };
+      # pull = {
+      #   ff = "only";
+      # };
+      # init = {
+      #   defaultBranch = "main";
+      # };
+      # credential = {
+      #   helper = "store";
+      # };
+      # push = {
+      #   followTags = "true";
+      # };
+      # sequence = {
+      #   editor = "code --wait";
+      # };
+    };
+
+
+      # settings = {
+      #   merge.tool = "vimdiff";  # Replace 'your-mergetool' with your desired tool, e.g., 'vimdiff', 'meld', etc.
+      #   mergetool.prompt = false;
+      # };
+      # extraConfig = {
+      #   color = {
+      #     ui = "auto";
+      #   };
+      #   diff = {
+      #     tool = "vimdiff";
+      #     mnemonicprefix = true;
+      #   };
+      #   # merge = {
+      #   #   tool = "splice";
+      #   # };
+      #   # push = {
+      #   #   default = "simple";
+      #   # };
+      #   # pull = {
+      #   #   rebase = true;
+      #   # };
+      #   # core = {
+      #   #   excludesfile = "~/.gitignore_global";
+      #   # };
+      #   # branch = {
+      #   #   autosetupmerge = true;
+      #   # };
+      #   # rerere = {
+      #   #   enabled = true;
+      #   # };
+      #   include = {
+      #     path = "~/.gitconfig.local";
+      #   };
+      # };
+    };
+
+}
+  # imports = [
+  #   "${fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master"}/modules/vscode-server/home.nix"
+  # ];
+  # imports = [
+  #   (fetchTarball {
+  #     url = "https://github.com/nix-community/nixos-vscode-server/tarball/fc900c16efc6a5ed972fb6be87df018bcf3035bc";
+  #     sha256 = "1rq8mrlmbzpcbv9ys0x88alw30ks70jlmvnfr2j8v830yy5wvw7h";
+  #   })
+  # ];
+  # services.vscode-server.enable = true;
+
+  # /modules/vscode-server/home.nix"
+  # ];
+  # services.vscode-server.enable = true;
+
+  # imports = [
+  #   "$fetchTarball {
+  #     "https://github.com/nix-community/nixos-vscode-server/tarball/fc900c16efc6a5ed972fb6be87df018bcf3035bc"
+  #   }/modules/vscode-server/home.nix"
+  # ];"https://github.com/msteen/nixos-vscode-server/tarball/master" sha256 "kke"}
+  # imports = [
+  #   "${fetchTarball {url=https://github.com/msteen/nixos-vscode-server/tarball/master;sha256=1rq8mrlmbzpcbv9ys0x88alw30ks70jlmvnfr2j8v830yy5wvw7h;}/modules/vscode-server/home.nix"
+  # ];
+  # services.vscode-server.enable = true;
+
+  #  imports = [
+  #   "${fetchTarball {
+  #     url = "https://github.com/msteen/nixos-vscode-server/tarball/master";
+  #     sha256 = "1rq8mrlmbzpcbv9ys0x88alw30ks70jlmvnfr2j8v830yy5wvw7h";
+  #   }}/modules/vscode-server/home.nix"
+  # ];
+  #
+  # services.vscode-server.enable = true;

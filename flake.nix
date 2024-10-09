@@ -5,6 +5,9 @@
 
   inputs = {
     # nixpkgs.url = "nixpkgs/nixos-23.11";
+
+    # vscode-server.url = "github:nix-community/nixos-vscode-server";
+
     nixpkgs = { url = "github:nixos/nixpkgs/nixos-unstable"; };
 
     neovimpkgs = { url = "github:nixos/nixpkgs/nixos-24.05"; };
@@ -16,6 +19,7 @@
     };
   };
 
+  # outputs = { nixpkgs, home-manager, neovimpkgs, vscode-server , ... }:
   outputs = { nixpkgs, home-manager, neovimpkgs, ... }:
     let
       lib = nixpkgs.lib;
@@ -41,7 +45,16 @@
         zsolt = home-manager.lib.homeManagerConfiguration {
           # inherit combinedPkgs;
           pkgs = combinedPkgs;
-          modules = [ ./home.nix ];
+          modules = [
+
+            # vscode-server.nixosModules.default
+            # ({ config, pkgs, ... }: {
+            #   services.vscode-server.enable = true;
+            # })
+
+            ./home.nix
+
+          ];
 
         };
       };
