@@ -1,0 +1,6 @@
+wget -qO- http://object.athtem.eei.ericsson.se/de-cni/ccd/ccd-c15a057/ccd-c15a057.admin.conf | sed -r 's/kubernetes-admin@kubernetes/C57/g' > c057.kubefile
+wget -qO- http://object.athtem.eei.ericsson.se/de-cni/ccd/ccd-c15a030/ccd-c15a030.admin.conf | sed -r 's/kubernetes-admin@kubernetes/C30/g' > c030.kubefile
+# wget -O c030 http://object.athtem.eei.ericsson.se/de-cni/ccd/ccd-c15a030/ccd-c15a030.admin.conf 
+
+KUBECONFIG=c030.kubefile:c057.kubefile:hal kubectl config view --merge --flatten > ~/.kube/merged
+

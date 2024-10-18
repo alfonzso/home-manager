@@ -1,10 +1,39 @@
 { lib, pkgs, ... }:
+let
+  # Define the path to your script, relative to home.nix
+  test = ./test.sh;
+in
 {
   xdg.configHome = "/home/ealfzso/.config-ubuntu-20.04";
+
+    systemd.user = {
+      services.myScriptService = {
+        # Description = "Run my script daily";
+        Service = {
+          ExecStart = "${pkgs.bash}/bin/bash ${test}";
+          Type = "simple";
+        };
+        Install = {
+          WantedBy = [ "default.target" ];
+        };
+      };
+
+      timers.myScriptService = {
+        # Description = "Run my script every day";
+        Timer = {
+          OnCalendar = "daily";
+          Persistent = true;
+        };
+        Install = {
+          WantedBy = [ "timers.target" ];
+        };
+      };
+  };
 
   home = {
 
     packages = with pkgs; [
+      postman
       ripgrep-all
       fzf
       tldr
@@ -60,6 +89,7 @@
           whitespace = "trailing-space,space-before-tab";
           quotepath = "off";
         };
+        pull.rebase = "true";
         stash = {
           showPatch = "1";
         };
